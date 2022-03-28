@@ -1,11 +1,16 @@
 import pickle
 import json
+import numpy as np
 from sklearn.metrics import accuracy_score
 
+# Loading the ML model
+model = pickle.load(open('ml_models/model.pkl', 'rb'))
 
+# test data inputs
+# input_data = (37, 1, 4, 140, 207, 0, 0, 130, 1, 1.5, 2)       # Likely
+# input_data = (48, 0, 2, 120, 284, 0, 0, 120, 0, 0.0, 1)       # Unlikely
 
 def PredictionAPI(input_data):
-    # checking using a ML algorithm
     
     # change the input data to a numpy array
     input_data_as_numpy_array = np.asarray(input_data)
@@ -30,3 +35,5 @@ def PredictionAPI(input_data):
             'status': 200
         }
         return HDRes, 200
+
+# PredictionAPI(input_data)
