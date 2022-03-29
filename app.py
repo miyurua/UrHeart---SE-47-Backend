@@ -2,6 +2,7 @@ from distutils.log import debug
 from flask import Flask, jsonify, request
 from flask_restful import Resource, Api
 from check.checker import PredictionAPI
+from flask_cors import CORS
 # from resources.routes import initialize_routes
 import json
 
@@ -33,4 +34,6 @@ def predict():
 
 
 # initialize_routes(api)
-app.run(debug=True)
+
+if __name__ == "__main__":
+    app.run(debug=True)
