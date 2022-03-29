@@ -33,6 +33,10 @@ def predict():
     return jsonify({'predResult':str(PredictionAPI(input_data))})
 
 
+@app.route('/test')
+def test():
+    return 'test'
+
 # initialize_routes(api)
 
 if __name__ == "__main__":

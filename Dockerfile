@@ -8,7 +8,16 @@ COPY Pipfile .
 COPY Pipfile.lock .
 RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --deploy
 
+# Install pipenv
 
-WORKDIR /python-docker
+RUN pip install pipenv
 
-COPY 
+RUN pipenv shell
+
+WORKDIR /UrHeart--SE-47-Backend
+
+RUN pipenv sync
+
+EXPOSE 5000
+
+CMD ["python", "app.py"]
