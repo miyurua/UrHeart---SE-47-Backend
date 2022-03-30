@@ -1,23 +1,13 @@
 # syntax=docker/dockerfile:1
 
-FROM python:3.9.7-slim as base
-
-# Install python dependencies in /.venv
-
-COPY Pipfile .
-COPY Pipfile.lock .
-RUN PIPENV_VENV_IN_PROJECT=1 pipenv install --deploy
-
-# Install pipenv
+FROM python:3.9.7
 
 RUN pip install pipenv
 
-RUN pipenv shell
+ENV PROJECT_DIR /UrHeart--SE-47-Backend
 
-WORKDIR /UrHeart--SE-47-Backend
+WORKDIR ${PROJECT_DIR}
 
-RUN pipenv sync
+COPY Pipfile Pipfile.lock ${PROJECT_DIR}/
 
-EXPOSE 5000
-
-CMD ["python", "app.py"]
+RUN pipenv install --system --deploy
