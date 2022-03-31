@@ -12,6 +12,10 @@ api=Api(app)
 
 
 # class CoreApi(Resource):
+@app.route('/')
+def home():
+    return "UrHeart"
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
