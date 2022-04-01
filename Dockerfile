@@ -1,15 +1,10 @@
-# syntax=docker/dockerfile:1
+# Dockerfile specifies hoe to build a Docker image
 
 FROM python:3.9.7
 
-RUN pip install pipenv
+ADD . /code
+WORKDIR /code
 
-ENV PROJECT_DIR /UrHeart--SE-47-Backend
+RUN pip install -r requirements.txt
 
-WORKDIR ${PROJECT_DIR}
-
-COPY Pipfile Pipfile.lock ${PROJECT_DIR}/
-
-RUN pipenv install --system --deploy
-
-CMD ["python","app.py"]
+ENTRYPOINT [ "python","app.py" ]
