@@ -35,7 +35,7 @@ def predict():
                     float(list['exerciseAngina']),	
                     float(list['oldpeak']), 
                     float(list['STslope']))
-    return jsonify({'predResult':str(PredictionAPI(input_data))})
+    return jsonify({'predResult':PredictionAPI(input_data)})
 
 
 @app.route('/test')
@@ -47,3 +47,4 @@ def test():
 if __name__ == "__main__":
     port = os.environ.get("PORT", 5000)
     app.run(debug = False, host = '0.0.0.0', port=port)
+    #'0.0.0.0'
