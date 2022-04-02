@@ -2,6 +2,7 @@ import pickle
 import json
 import numpy as np
 from sklearn.metrics import accuracy_score
+from flask import jsonify
 
 # Loading the ML model
 model = pickle.load(open('ml_models/model.pkl', 'rb'))
@@ -27,13 +28,13 @@ def PredictionAPI(input_data):
             'output':'This Person is NOT Likely to have a Heart Disease',
             'status': 200
         }
-        return NHDRes, 200
+        return jsonify(NHDRes)
     else:
         print('This Person is Likely to have a Heart Disease')
         HDRes = {
             'output':'This Person is Likely to have a Heart Disease',
             'status': 200
         }
-        return HDRes, 200
+        return jsonify(HDRes)
 
 # PredictionAPI(input_data)
