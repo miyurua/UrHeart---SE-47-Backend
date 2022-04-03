@@ -1,6 +1,6 @@
 # UrHeart---SE-47-Backend
 
-## Steps
+## Steps (Running Locally)
 
 1. `code` dropdown list --> `Download ZIP`
 
