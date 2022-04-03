@@ -3,7 +3,12 @@
 ## Steps
 
 1. `code` dropdown list --> `Download ZIP`
-2. Open `windows + R` type `cmd`
-3. `pip install pipenv`
-4. `pipenv install` or `pipenv sync`
-5. `python app.py`
+
+3. Open `windows + R` type `cmd`
+ 
+5. `pip install pipenv`
+ 
+7. `pipenv install` or `pipenv sync`
+
+9. `python app.py`
+
