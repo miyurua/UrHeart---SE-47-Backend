@@ -27,13 +27,13 @@ def PredictionAPI(input_data):
             'output':'This Person is NOT Likely to have a Heart Disease',
             'status': 200
         }
-        return NHDRes, 200
+        return NHDRes
     else:
         print('This Person is Likely to have a Heart Disease')
         HDRes = {
             'output':'This Person is Likely to have a Heart Disease',
             'status': 200
         }
-        return HDRes, 200
+        return HDRes
 
 # PredictionAPI(input_data)
