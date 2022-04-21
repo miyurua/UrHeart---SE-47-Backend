@@ -11,6 +11,9 @@ numpy = "*"
 sklearn = "*"
 flask-cors = "*"
 flask-uploads = "*"
+tensorflow = "*"
+matplotlib = "*"
+scikit-image = "*"
 
 [dev-packages]
 
