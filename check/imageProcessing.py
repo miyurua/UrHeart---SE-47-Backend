@@ -27,6 +27,7 @@ def ImageProcessingAPI(input_data):
     fig0.set_size_inches(20, 20)
     image=imread(filepath)
 
+    # Removing gridlines / Perform Threshholding, Binarization, Gaussian filtering
     fig1 , ax1 = plt.subplots()
     fig1.set_size_inches(20, 20)
     # converting to gray scale
@@ -118,9 +119,9 @@ def ImageProcessingAPI(input_data):
         }
         return NHDRes
     elif pred == 3:
-        print('MI')
+        print('PMI')
         NHDRes = {
-            'output':'MI',
+            'output':'PMI',
             'status': 200
         }
         return NHDRes
