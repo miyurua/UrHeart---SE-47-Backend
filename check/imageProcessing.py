@@ -16,11 +16,14 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 
 # Loading the ML model
-json_string = '{"class_name": "Sequential", "config": {"name": "sequential", "layers": [{"class_name": "InputLayer", "config": {"batch_input_shape": [null, 2073600], "dtype": "float32", "sparse": false, "ragged": false, "name": "dense_input"}}, {"class_name": "Dense", "config": {"name": "dense", "trainable": true, "batch_input_shape": [null, 2073600], "dtype": "float32", "units": 726, "activation": "relu", "use_bias": true, "kernel_initializer": {"class_name": "GlorotUniform", "config": {"seed": null}}, "bias_initializer": {"class_name": "Zeros", "config": {}}, "kernel_regularizer": null, "bias_regularizer": null, "activity_regularizer": null, "kernel_constraint": null, "bias_constraint": null}}, {"class_name": "Dense", "config": {"name": "dense_1", "trainable": true, "dtype": "float32", "units": 128, "activation": "sigmoid", "use_bias": true, "kernel_initializer": {"class_name": "GlorotUniform", "config": {"seed": null}}, "bias_initializer": {"class_name": "Zeros", "config": {}}, "kernel_regularizer": null, "bias_regularizer": null, "activity_regularizer": null, "kernel_constraint": null, "bias_constraint": null}}, {"class_name": "Dense", "config": {"name": "dense_2", "trainable": true, "dtype": "float32", "units": 128, "activation": "relu", "use_bias": true, "kernel_initializer": {"class_name": "GlorotUniform", "config": {"seed": null}}, "bias_initializer": {"class_name": "Zeros", "config": {}}, "kernel_regularizer": null, "bias_regularizer": null, "activity_regularizer": null, "kernel_constraint": null, "bias_constraint": null}}, {"class_name": "Dense", "config": {"name": "dense_3", "trainable": true, "dtype": "float32", "units": 4, "activation": "softmax", "use_bias": true, "kernel_initializer": {"class_name": "GlorotUniform", "config": {"seed": null}}, "bias_initializer": {"class_name": "Zeros", "config": {}}, "kernel_regularizer": null, "bias_regularizer": null, "activity_regularizer": null, "kernel_constraint": null, "bias_constraint": null}}]}, "keras_version": "2.8.0", "backend": "tensorflow"}'
-from tensorflow.keras.models import model_from_json
-model = model_from_json(json_string)
+from tensorflow.keras.models import load_model
+model = load_model('ml_models/NNmodels.h5')
+# json_string = '{"class_name": "Sequential", "config": {"name": "sequential", "layers": [{"class_name": "InputLayer", "config": {"batch_input_shape": [null, 2073600], "dtype": "float32", "sparse": false, "ragged": false, "name": "dense_input"}}, {"class_name": "Dense", "config": {"name": "dense", "trainable": true, "batch_input_shape": [null, 2073600], "dtype": "float32", "units": 726, "activation": "relu", "use_bias": true, "kernel_initializer": {"class_name": "GlorotUniform", "config": {"seed": null}}, "bias_initializer": {"class_name": "Zeros", "config": {}}, "kernel_regularizer": null, "bias_regularizer": null, "activity_regularizer": null, "kernel_constraint": null, "bias_constraint": null}}, {"class_name": "Dense", "config": {"name": "dense_1", "trainable": true, "dtype": "float32", "units": 128, "activation": "sigmoid", "use_bias": true, "kernel_initializer": {"class_name": "GlorotUniform", "config": {"seed": null}}, "bias_initializer": {"class_name": "Zeros", "config": {}}, "kernel_regularizer": null, "bias_regularizer": null, "activity_regularizer": null, "kernel_constraint": null, "bias_constraint": null}}, {"class_name": "Dense", "config": {"name": "dense_2", "trainable": true, "dtype": "float32", "units": 128, "activation": "relu", "use_bias": true, "kernel_initializer": {"class_name": "GlorotUniform", "config": {"seed": null}}, "bias_initializer": {"class_name": "Zeros", "config": {}}, "kernel_regularizer": null, "bias_regularizer": null, "activity_regularizer": null, "kernel_constraint": null, "bias_constraint": null}}, {"class_name": "Dense", "config": {"name": "dense_3", "trainable": true, "dtype": "float32", "units": 4, "activation": "softmax", "use_bias": true, "kernel_initializer": {"class_name": "GlorotUniform", "config": {"seed": null}}, "bias_initializer": {"class_name": "Zeros", "config": {}}, "kernel_regularizer": null, "bias_regularizer": null, "activity_regularizer": null, "kernel_constraint": null, "bias_constraint": null}}]}, "keras_version": "2.8.0", "backend": "tensorflow"}'
+# from tensorflow.keras.models import model_from_json
+# model = model_from_json(json_string)
 
 def ImageProcessingAPI(input_data):
+    # model = load_model('ml_models/NNmodels.h5')
     # image pre processing
     filepath = "static/uploads/"+input_data
     fig0 , ax0 = plt.subplots()
@@ -92,33 +95,30 @@ def ImageProcessingAPI(input_data):
 
     # prediction
     prediction = model.predict(input_norm)
-    print(prediction)
-    print('shape of preds', prediction.shape)
     pred = np.argmax(prediction[0])
-    print(pred)
- 
-    if pred == 0:
+    print(np.argmax(prediction[0]))
+    if np.argmax(prediction[0]) == 0:
         print('Normal')
         NHDRes = {
             'output':'Normal',
             'status': 200
         }
         return NHDRes
-    elif pred == 1:
+    elif np.argmax(prediction[0]) == 1:
         print('HB')
         NHDRes = {
             'output':'HB',
             'status': 200
         }
         return NHDRes
-    elif pred == 2:
+    elif np.argmax(prediction[0]) == 2:
         print('MI')
         NHDRes = {
             'output':'MI',
             'status': 200
         }
         return NHDRes
-    elif pred == 3:
+    elif np.argmax(prediction[0]) == 3:
         print('PMI')
         NHDRes = {
             'output':'PMI',

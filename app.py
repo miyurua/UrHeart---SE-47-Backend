@@ -47,14 +47,13 @@ def predict():
 def upload_file():
     if request.method == 'POST':
         file = request.files['file']
-        print(file)
         if file.filename == '':
             #flash('No image selected for uploading')
             return jsonify({'predResult': 'No image selected'})
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            print('upload_image filename: ' + filename)
+            print('uploaded_image filename: ' + filename)
             #flash('Image successfully uploaded and displayed below')
             #return redirect(url_for('static', filename='uploads/' + filename), code=301)
             return jsonify({
@@ -70,6 +69,7 @@ def upload_file():
 
 if __name__ == "__main__":
     #app.secret_key = 'ur' #the secret_key can be anything
+    app.env = "development"
     port = os.environ.get("PORT", 5000)
     app.run(debug = False, host = '0.0.0.0', port=port)
     #app.run(debug=True)
