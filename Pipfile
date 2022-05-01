@@ -14,8 +14,6 @@ flask-uploads = "*"
 tensorflow = "*"
 matplotlib = "*"
 scikit-image = "*"
-keras = "*"
-tensorflow-gpu = "*"
 
 [dev-packages]
 
